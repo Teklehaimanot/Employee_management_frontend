@@ -1,25 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import AddEmployee from './components/AddEmployee';
+import EmployeeList from './components/EmployeeList';
+import Header from './components/Header';
+import { GetEmployee } from './state/action';
+import { employeeState } from './state/employeeReducer';
+const App: React.FC = () => {
 
-function App() {
+  
+  const employee = useSelector<employeeState, employeeState['employees']>(state => state.employees)
+  const [showAddEmployee, setShowAddEmployee] = useState(false)
+  const dispatch = useDispatch()
+
+  const toggleAddEmployee = () => {
+    setShowAddEmployee(!showAddEmployee);
+  }
+
+  useEffect(() => {
+    dispatch(GetEmployee());
+  }, [dispatch]);
+
+
+  console.log('emp', employee);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+
+      <Header onToggle={toggleAddEmployee} showAdd={showAddEmployee} />
+      <>
+        {showAddEmployee ? (
+          <AddEmployee />
+        ) : ''}
+      </>
+      {employee.length ?
+        <EmployeeList  employees={employee} /> : 'No Employee to show'}
+
     </div>
+
+
   );
 }
 
