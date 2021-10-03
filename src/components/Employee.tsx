@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FaTimes } from 'react-icons/fa'
+import { FaTimes, FaUserEdit } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
 import { employeeDelete } from '../state/action'
 import { employee } from '../state/employeeReducer'
@@ -19,11 +19,17 @@ const Employee: React.FC<Props> = ({ employee }) => {
         setSettogglePup(!togglePupup)
     }
     return (
-        <div className='task' onDoubleClick ={handlePoupup}  >
+        <div className='task'  >
 
             <h3 >{employee.name}
-                <FaTimes style={{ color: 'red', cursor: 'pointer' }} onClick={() => deleteEmployee(employee._id)}
-                />
+            <div className= 'task-edit ' >
+            <FaUserEdit onClick={handlePoupup} />
+            <span></span>
+             <FaTimes style={{ color: 'red', cursor: 'pointer' }} onClick={() => deleteEmployee(employee._id)}/>
+            </div>
+            
+            
+
             </h3>
             <div className='task-employee'>
                 <span>  {employee.dateOfBirth}</span>
@@ -32,7 +38,7 @@ const Employee: React.FC<Props> = ({ employee }) => {
             </div>
             {
                 togglePupup ? (
-                    <PopUp Employee = {employee} TogglePupUp = {()=>setSettogglePup(false)}/>
+                    <PopUp Employee={employee} TogglePupUp={() => setSettogglePup(false)} />
                 ) : ''
             }
 

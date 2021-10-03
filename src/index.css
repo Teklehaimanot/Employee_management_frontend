@@ -80,32 +80,11 @@ body {
     margin-bottom: 40px;
 }
 
-
-/* .edit-form {
-    background-color: #f4f4f4;
-    opacity: 1;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 20px;
-    z-index: 1;
+.task-edit span {
+    background-color: #888;
+    padding: 0 0.1px;
+    margin: 8px;
 }
-
-.add-for {
-    position: relative;
-    top: 0;
-    left: 0%;
-    background-color: #fff;
-    box-shadow: 2px 3px 3px 3px rgba(29, 29, 29, 0.452);
-    max-width: 500px;
-    padding: 20px;
-    z-index: 1;
-} */
 
 .form-control {
     margin: 20px 0;
@@ -141,10 +120,4 @@ body {
 footer {
     margin-top: 30px;
     text-align: center;
-}
-
-@media screen and (min-width: 600px) {
-    .add-for {
-        left: 30%;
-    }
 }
