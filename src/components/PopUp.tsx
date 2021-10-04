@@ -23,7 +23,7 @@ const PopUp: React.FC<Props> = ({ Employee, TogglePupUp }) => {
             alert('error please fill all fields!')
             return
         }
-        if (typeof (salary) !== 'number') {
+        if(isNaN( +(salary))){
             alert('error please enter your salary in number format')
             return
         }

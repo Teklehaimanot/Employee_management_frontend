@@ -21,8 +21,6 @@ const App: React.FC = () => {
     dispatch(GetEmployee());
   }, [dispatch]);
 
-
-  console.log('emp', employee);
   return (
     <div className="container">
 

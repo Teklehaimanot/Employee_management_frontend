@@ -19,14 +19,14 @@ const AddEmployee: React.FC = () => {
             alert('error please fill all fields!')
             return
         }
-        if(typeof(salary)!== 'number'){
+        if(isNaN( +(salary))){
             alert('error please enter your salary in number format')
             return
         }
         addEmployee({ _id, name, dateOfBirth, gender, salary });
         setName('');
         setDateOfBirth('');
-        setGender('');
+        setGender('M');
         setSalary('');
 
     }
