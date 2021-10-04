@@ -5,31 +5,35 @@ import { employee } from "../state/employeeReducer"
 
 interface Props {
     Employee: employee,
-    TogglePupUp: ()=>void
+    TogglePupUp: () => void
 }
 
 
-const PopUp: React.FC<Props> = ({ Employee,TogglePupUp}) => {
+const PopUp: React.FC<Props> = ({ Employee, TogglePupUp }) => {
 
     const [name, setName] = useState(Employee.name)
     const [dateOfBirth, setDateOfBirth] = useState(Employee.dateOfBirth)
     const [gender, setGender] = useState(Employee.gender)
-    const [salary, setSalary] = useState(Employee.salary.toString())
+    const [salary, setSalary] = useState(Employee.salary)
     const _id = Employee._id
     const dispatch = useDispatch()
     const submitEmployee = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!name || !dateOfBirth || !gender || !salary) {
-            alert('please check all fields are not empty')
+            alert('error please fill all fields!')
             return
         }
-        updateEmployee(_id,{ _id,name, dateOfBirth, gender, salary} );
+        if (typeof (salary) !== 'number') {
+            alert('error please enter your salary in number format')
+            return
+        }
+        updateEmployee(_id, { _id, name, dateOfBirth, gender, salary });
         TogglePupUp()
 
 
     }
 
-    const updateEmployee = (id: number,emp: employee) => {
+    const updateEmployee = (id: number, emp: employee) => {
         dispatch(employeeUpdate(id, emp))
     }
     return (

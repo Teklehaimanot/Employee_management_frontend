@@ -5,7 +5,7 @@ export interface employee {
     name: string;
     dateOfBirth: string;
     gender: string;
-    salary: String;
+    salary: string ;
 }
 
 export interface employeeState {

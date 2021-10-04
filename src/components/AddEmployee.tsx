@@ -4,22 +4,26 @@ import { employeeAdd } from "../state/action"
 import { employee } from "../state/employeeReducer"
 import { v4 as uuidv4 } from 'uuid';
 
-const AddEmployee: React.FC= () => {
+const AddEmployee: React.FC = () => {
 
-    const  dispatch = useDispatch()
+    const dispatch = useDispatch()
     const [name, setName] = useState('')
     const [dateOfBirth, setDateOfBirth] = useState('')
-    const [gender, setGender] = useState('')
-    const [salary, setSalary] = useState('')
-    const _id = parseInt(uuidv4()) ;
+    const [gender, setGender] = useState('M')
+    const [salary, setSalary] = useState ('')
+    const _id = parseInt(uuidv4());
 
     const submitEmployee = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!name || !dateOfBirth || !gender || ! salary) {
-            alert('please check all fields are not empty')
+        if (!name || !dateOfBirth || !gender || !salary) {
+            alert('error please fill all fields!')
             return
         }
-        addEmployee({_id,name, dateOfBirth, gender, salary});
+        if(typeof(salary)!== 'number'){
+            alert('error please enter your salary in number format')
+            return
+        }
+        addEmployee({ _id, name, dateOfBirth, gender, salary });
         setName('');
         setDateOfBirth('');
         setGender('');
@@ -29,9 +33,9 @@ const AddEmployee: React.FC= () => {
 
     const addEmployee = (emp: employee) => {
         dispatch(employeeAdd(emp))
-      }
+    }
     return (
-        <form className="add-form" onSubmit = {submitEmployee} >
+        <form className="add-form" onSubmit={submitEmployee} >
             <div className="form-control">
                 <label>Name of Employee</label>
                 <input
@@ -43,7 +47,7 @@ const AddEmployee: React.FC= () => {
             </div>
             <div className="form-control">
                 <label>Day of Birth</label>
-                <input type='text'
+                <input type='date'
                     placeholder='dd-mm-year'
                     value={dateOfBirth}
                     onChange={(e) => setDateOfBirth(e.target.value)}
@@ -51,11 +55,15 @@ const AddEmployee: React.FC= () => {
             </div>
             <div className="form-control">
                 <label>Gender</label>
-                <input type='text'
+                <select 
                     placeholder='Add Gender'
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
-                />
+                >
+                    <option value="M">M</option>
+                    <option value="F">F</option>
+
+                </select>
             </div>
 
             <div className="form-control">
